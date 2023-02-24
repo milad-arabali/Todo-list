@@ -1,9 +1,11 @@
 const todoinput = document.querySelector(".todo-input")
 const todobutton = document.querySelector(".todo-button")
 const todolist = document.querySelector(".todo-list")
+const todo_option = document.querySelector(".filter-todo")
 
 todobutton.addEventListener("click",addtodobtn)
 todolist.addEventListener("click",deleteComplete_Todo)
+todo_option.addEventListener("click",filter_todo)
 
 
 
@@ -43,13 +45,31 @@ function deleteComplete_Todo (event){
 
 
 }
-function filter_todo(){
+function filter_todo(event){ 
+    const todo_filter = todolist.childNodes;
+    // console.log(todo_filter)
+    todo_filter.forEach(function(todo){
+        switch(event.target.value){
+            case "all":
+                todo.style.display = "flex";
+                break;
+            case "completed":
+                if (todo.classList.contains("completed")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+                break;
+            case "uncompleted":
+                if (todo.classList.contains("completed")) {
+                    todo.style.display = "none";
+                } else {
+                    todo.style.display = "flex";
+                }
+                break;
+        }
+    })
 
-
-
-
-
-    
 }
 function localstoragetodos (todo){
     let todos;
